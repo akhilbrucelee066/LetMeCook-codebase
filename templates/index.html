@@ -1,0 +1,199 @@
+{% extends "layout.html" %} {% block body %}
+
+<div class="container">
+  <div class="section">
+    <h2>Add items and their Quantities</h2>
+  </div>
+
+  <div class="list">
+    <form id="ingredientForm" action="/" method="post">
+      <input name="itemName" type="text" placeholder="Item name" required />
+      <input name="quantity" placeholder="Quantity" />
+      <button type="submit">ADD</button>
+    </form>
+
+    <div class="list">
+      <h2>Ingredients</h2>
+      <ul id="ingredientList"></ul>
+    </div>
+
+    <div id="letsCookBtnContainer" style="display: none">
+      <button id="letsCookBtn" class="lets-cook-btn">Let's Cook</button>
+    </div>
+
+    <div id="recipeModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Additional Recipe Details</h3>
+        <form id="recipeForm" action="/create_recipe" method="post">
+          <textarea
+            name="description"
+            placeholder="Recipe Description (optional)"
+            rows="4"
+          ></textarea>
+          <select name="language">
+            <option value="">Select Language (optional)</option>
+            <option value="English">English</option>
+            <option value="Telugu">Telugu</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Tamil">Tamil</option>
+          </select>
+          <input type="hidden" name="ingredients" id="ingredientsInput" />
+          <button type="submit" class="lets-cook-btn">Let's Cook</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay" style="display: none">
+      <div class="loading-card">
+        <div class="loading-spinner"></div>
+        <h3>Let AI Cook... for you</h3>
+        <div id="quoteContainer" class="quote-container">
+          <p class="food-quote fade"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const ingredients = [];
+      const form = document.getElementById("ingredientForm");
+      const list = document.getElementById("ingredientList");
+      const letsCookBtn = document.getElementById("letsCookBtnContainer");
+      const modal = document.getElementById("recipeModal");
+      const closeBtn = document.getElementsByClassName("close")[0];
+      const recipeForm = document.getElementById("recipeForm");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const itemName = form.itemName.value;
+        const quantity = form.quantity.value;
+        const ingredient = quantity ? `${itemName} - ${quantity}` : itemName;
+        ingredients.push(ingredient);
+
+        list.innerHTML = "";
+        ingredients.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          list.appendChild(li);
+        });
+        letsCookBtn.style.display = ingredients.length > 0 ? "block" : "none";
+        form.reset();
+      });
+
+      document.getElementById("letsCookBtn").onclick = function () {
+        modal.style.display = "block";
+        document.getElementById("ingredientsInput").value =
+          JSON.stringify(ingredients);
+      };
+
+      closeBtn.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      const foodQuotes = [
+        "Turning your ingredients into magic... Just like your mom, but with more AI!",
+        "Cooking up something special... No kitchen fires guaranteed!",
+        "Stirring the digital pot... Because real pots are too mainstream!",
+        "Adding a pinch of AI and a dash of wisdom...",
+        "Your taste buds are about to send you a thank you note!",
+        "Warning: This recipe might make you famous among your friends!",
+        "Calculating the perfect recipe... No math degree required!",
+        "Creating flavors that would make your grandma proud!",
+        "Loading deliciousness... Please wait while we sprinkle some joy!",
+        "Recipe in progress... Because good food is worth the wait!",
+      ];
+
+      function showLoadingOverlay() {
+        const overlay = document.getElementById("loadingOverlay");
+        const quoteElement = document.querySelector(".food-quote");
+        let currentQuoteIndex = 0;
+
+        overlay.style.display = "flex";
+
+        function updateQuote() {
+          quoteElement.classList.remove("show");
+
+          setTimeout(() => {
+            quoteElement.textContent = foodQuotes[currentQuoteIndex];
+            quoteElement.classList.add("show");
+            currentQuoteIndex = (currentQuoteIndex + 1) % foodQuotes.length;
+          }, 500);
+        }
+        updateQuote();
+        return setInterval(updateQuote, 4000);
+      }
+
+      function hideLoadingOverlay() {
+        document.getElementById("loadingOverlay").style.display = "none";
+      }
+
+      recipeForm.onsubmit = function (e) {
+        e.preventDefault();
+        const quoteInterval = showLoadingOverlay();
+        const description = recipeForm.querySelector(
+          '[name="description"]'
+        ).value;
+        const language = recipeForm.querySelector('[name="language"]').value;
+        const requestData = {
+          ingredients: ingredients,
+          preferences: {
+            description: description,
+            language: language,
+          },
+        };
+        fetch("/create_recipe", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            clearInterval(quoteInterval);
+            hideLoadingOverlay();
+            if (data.success) {
+              window.location.href = "/recipe";
+            } else {
+              alert("Failed to generate recipe. Please try again.");
+            }
+          })
+          .catch((error) => {
+            clearInterval(quoteInterval);
+            hideLoadingOverlay();
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+          });
+      };
+    </script>
+  </div>
+  <div class="about_app">
+    <h2>About 'Let Me Cook'</h2>
+    <p>
+      Let Me Cook is an innovative recipe generation application that leverages
+      the power of AI to create personalized recipes based on available
+      ingredients.
+    </p>
+    <p>
+      Simply input your available ingredients, and Let Me Cook will generate
+      creative and delicious recipes tailored to what you have on hand. Whether
+      you're a seasoned chef or a cooking novice, this app helps you make the
+      most of your ingredients while expanding your culinary horizons.
+    </p>
+    <p>
+      The application features a user-friendly interface where users can input
+      their available ingredients and receive detailed recipes complete with
+      descriptions, ingredient lists, and step-by-step instructions. What sets
+      this project apart is its ability to generate recip   es in multiple
+      languages and consider user preferences and dietary restrictions.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

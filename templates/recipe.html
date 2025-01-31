@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container recipe_container">
+    <div class="recipe-card">
+        {% if recipe %}
+            <h1 class="recipe-title">{{ recipe.recipeTitle }}</h1>
+            
+            <div class="description-section">
+                <h2>Description</h2>
+                <p>{{ recipe.description }}</p>
+            </div>
+            
+            <div class="ingredients-section">
+                <h2>Ingredients</h2>
+                <ul>
+                    {% for ingredient in recipe.ingredients.split('\n') %}
+                        <li>{{ ingredient.strip() }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="instructions-section">
+                <h2>Instructions</h2>
+                {% if recipe.instructions %}
+                    {% for step_num, step in recipe.instructions.items() %}
+                        <p class="instruction-step">{{ step }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% else %}
+            <p>No recipe data available</p>
+        {% endif %}
+
+        <div class="back-link-container">
+            <a href="/" class="lets-cook-btn back-btn">Create New Recipe</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

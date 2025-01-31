@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container contact-container">
+    <div class="dev-profile">
+        <img src="{{ url_for('static', filename='dev_pic.png') }}" alt="Developer" class="dev-image">
+        <h1>Pranay Akhil Jeedimalla</h1>
+        <div class="social-links">
+            <a href="mailto:jpranayakhil066@gmail.com?subject=Let%20Me%20Cook%20-%20Website%20Inquiry&body=Hi%20there%2C%0A%0AI%20found%20your%20Let%20Me%20Cook%20website%20and%20would%20like%20to%20connect%20regarding%3A%0A%0A" 
+               class="contact-link email-link">
+                <i class="fas fa-envelope"></i> Email Me
+            </a>
+            <a href="https://github.com/akhilbrucelee066" target="_blank" class="contact-link github-link">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/pranay-akhil-jeedimalla-578676252/" target="_blank" class="contact-link linkedin-link">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+        </div>
+    </div>
+
+    <div class="project-info">
+        <h2>About Let Me Cook</h2>
+        <p>
+            Let Me Cook is an innovative recipe generation application that leverages the power of Google's Gemini AI to create 
+            personalized recipes based on available ingredients. This project was developed to solve the common problem of 
+            deciding what to cook with ingredients already in your kitchen.
+        </p>
+        <p>
+            The application features a user-friendly interface where users can input their available ingredients and receive 
+            detailed recipes complete with descriptions, ingredient lists, and step-by-step instructions. What sets this project 
+            apart is its ability to generate recipes in multiple languages and consider user preferences and dietary restrictions.
+        </p>
+        <p>
+            From a technical perspective, the project utilizes Flask for the backend, integrates with Google's Generative AI API, 
+            and implements real-time recipe generation with dynamic loading states and engaging user feedback. The application 
+            also features a responsive design, error handling, and session management for a seamless user experience.
+        </p>
+    </div>
+</div>
+{% endblock %}
