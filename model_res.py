@@ -2,7 +2,7 @@ import google.generativeai as genai
 from google.ai.generativelanguage_v1beta.types import content
 import json
 
-api_key = 'AIzaSyCV7s5lxc7HcUkNbeb37cpDumiiuBLUeB8'
+api_key = ""
 
 genai.configure(api_key=api_key)
 
