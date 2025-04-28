@@ -51,7 +51,7 @@ generation_config = {
 }
 
 model = genai.GenerativeModel(
-  model_name="gemini-2.0-flash-exp",
+  model_name="gemini-2.0-flash-lite",
   generation_config=generation_config,
   system_instruction="You are a world-class chef and expert in recipe generation. Based on the user's input of available ingredients and a brief description, generate the best possible cooking recipe. You may include basic supporting ingredients like salt, water, sugar, or oil only if necessary for the recipe. user input:",
 )
