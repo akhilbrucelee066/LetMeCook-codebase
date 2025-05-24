@@ -2,7 +2,7 @@
 
 An AI-powered recipe generation application that creates personalized recipes based on your available ingredients.
 
-## Features ✨
+## Features
 
 - **Ingredient-Based Recipe Generation**: Input your available ingredients and get customized recipes
 - **Multi-Language Support**: Generate recipes in English, Telugu, Hindi, and Tamil
@@ -14,7 +14,7 @@ An AI-powered recipe generation application that creates personalized recipes ba
   - Step-by-step cooking instructions
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-## Technology Stack 🛠️
+## Technology Stack:
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Flask (Python)
@@ -38,7 +38,7 @@ python app.py
 ```
 
 
-## How to Use 📝
+## How to Use:
 
 1. Enter available ingredients one by one with their quantities
 2. Click "ADD" after each ingredient
@@ -57,4 +57,3 @@ Feel free to fork this project and submit pull requests. You can also open issue
 
 - Google Generative AI for providing the AI model
 - Flask community for the excellent web framework
-- All contributors and users of the application
