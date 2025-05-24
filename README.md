@@ -37,10 +37,6 @@ pip install -r requirements.txt
 python app.py
 ```
 
-5. Open your browser and navigate to:
-```
-http://localhost:5000
-```
 
 ## How to Use 📝
 
@@ -51,39 +47,13 @@ http://localhost:5000
 5. Submit and wait for your personalized recipe
 6. View your generated recipe with complete instructions
 
-## Project Structure 📁
 
-```
-LetMeCook/
-├── static/
-│   ├── styles.css
-│   └── dev_pic.png
-├── templates/
-│   ├── layout.html
-│   ├── index.html
-│   ├── recipe.html
-│   └── contact.html
-├── app.py
-├── model_res.py
-└── requirements.txt
-```
-
-## Contributing 🤝
+## Contributing
 
 Feel free to fork this project and submit pull requests. You can also open issues for bugs or feature requests.
 
-## Contact 📧
 
-- **Developer**: Pranay Akhil Jeedimalla
-- **Email**: jpranayakhil066@gmail.com
-- **LinkedIn**: [Pranay Akhil Jeedimalla](https://www.linkedin.com/in/pranay-akhil-jeedimalla-578676252/)
-- **GitHub**: [akhilbrucelee066](https://github.com/akhilbrucelee066)
-
-## License 📄
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments 🙏
+## Acknowledgments
 
 - Google Generative AI for providing the AI model
 - Flask community for the excellent web framework
