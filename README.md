@@ -12,7 +12,7 @@ An AI-powered recipe generation application that creates personalized recipes ba
   - Step-by-step cooking instructions
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-## Technology Stack:
+## Tech-Stack:
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Flask (Python)
